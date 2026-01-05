@@ -367,9 +367,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Add any interactive functionality here if needed
-        document.querySelectorAll('.nav a').forEach(link => {
-            if (link.href === window.location.href) {
-                link.style.color = '#d4af37';
-                link.style.fontWeight = 'bold';
-            }
-        });
+document.querySelectorAll('.nav a').forEach(link => {
+    if (link.href === window.location.href) {
+        link.style.color = '#d4af37';
+        link.style.fontWeight = 'bold';
+    }
+});
