@@ -397,3 +397,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+
+function setActiveNav(sectionId) {
+    // Remove active class from all nav links
+    document.querySelectorAll('nav ul a').forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    // Add active class to the target nav link
+    const targetNav = document.querySelector(`nav ul a[href="#${sectionId}"]`);
+    if (targetNav) {
+        targetNav.classList.add('active');
+    }
+}
