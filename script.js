@@ -360,54 +360,61 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Initialize the page
-document.addEventListener('DOMContentLoaded', function () {
-    renderProducts();
-    updateCartCount();
-});
+
 
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Find the "Shop Collection" button and "Products" nav link
-    const shopButton = document.querySelector('a.btn[href="#products"]');
-    const productsNavLink = document.querySelector('nav ul a[href="#products"]');
+    // Get all navigation links
+    const navLinks = document.querySelectorAll('nav ul a');
+    const sections = document.querySelectorAll('section[id]');
     
-    if (shopButton && productsNavLink) {
-        // Add click event to the shop button
+    // Handle "Shop Collection" button click
+    const shopButton = document.querySelector('a.btn[href="#products"]');
+    if (shopButton) {
         shopButton.addEventListener('click', function(e) {
             e.preventDefault();
-            
-            // Remove active class from all nav links
-            document.querySelectorAll('nav ul a').forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            // Add active class to products nav link
-            productsNavLink.classList.add('active');
+            setActiveNav('products');
             
             // Scroll to products section
-            const targetSection = document.querySelector(this.getAttribute('href'));
+            const targetSection = document.querySelector('#products');
             if (targetSection) {
                 window.scrollTo({
-                    top: targetSection.offsetTop - 80, // Adjust offset for header
+                    top: targetSection.offsetTop - 80,
                     behavior: 'smooth'
                 });
             }
         });
     }
-});
-
-
-function setActiveNav(sectionId) {
-    // Remove active class from all nav links
-    document.querySelectorAll('nav ul a').forEach(link => {
-        link.classList.remove('active');
-    });
     
-    // Add active class to the target nav link
-    const targetNav = document.querySelector(`nav ul a[href="#${sectionId}"]`);
-    if (targetNav) {
-        targetNav.classList.add('active');
+    // Function to set active navigation
+    function setActiveNav(sectionId) {
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('active');
+            }
+        });
     }
-}
+    
+    // Optional: Update active nav on scroll
+    window.addEventListener('scroll', function() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        if (current) {
+            setActiveNav(current);
+        }
+    });
+});
+// Initialize the page
+document.addEventListener('DOMContentLoaded', function () {
+    renderProducts();
+    updateCartCount();
+});
