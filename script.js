@@ -360,59 +360,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Get all navigation links
-    const navLinks = document.querySelectorAll('nav ul a');
-    const sections = document.querySelectorAll('section[id]');
-    
-    // Handle "Shop Collection" button click
-    const shopButton = document.querySelector('a.btn[href="#products"]');
-    if (shopButton) {
-        shopButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            setActiveNav('products');
-            
-            // Scroll to products section
-            const targetSection = document.querySelector('#products');
-            if (targetSection) {
-                window.scrollTo({
-                    top: targetSection.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    }
-    
-    // Function to set active navigation
-    function setActiveNav(sectionId) {
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${sectionId}`) {
-                link.classList.add('active');
-            }
-        });
-    }
-    
-    // Optional: Update active nav on scroll
-    window.addEventListener('scroll', function() {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 100;
-            const sectionHeight = section.clientHeight;
-            if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
-                current = section.getAttribute('id');
-            }
-        });
-        
-        if (current) {
-            setActiveNav(current);
-        }
-    });
-});
 // Initialize the page
 document.addEventListener('DOMContentLoaded', function () {
     renderProducts();
