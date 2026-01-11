@@ -365,3 +365,35 @@ document.addEventListener('DOMContentLoaded', function () {
     renderProducts();
     updateCartCount();
 });
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Find the "Shop Collection" button and "Products" nav link
+    const shopButton = document.querySelector('a.btn[href="#products"]');
+    const productsNavLink = document.querySelector('nav ul a[href="#products"]');
+    
+    if (shopButton && productsNavLink) {
+        // Add click event to the shop button
+        shopButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Remove active class from all nav links
+            document.querySelectorAll('nav ul a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class to products nav link
+            productsNavLink.classList.add('active');
+            
+            // Scroll to products section
+            const targetSection = document.querySelector(this.getAttribute('href'));
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop - 80, // Adjust offset for header
+                    behavior: 'smooth'
+                });
+            }
+        });
+    }
+});
