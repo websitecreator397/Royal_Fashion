@@ -777,6 +777,28 @@ body {
     padding: 20px;
 }
 
+
+/* Make sure the active state is properly styled */
+nav ul a.active {
+    color: #ff3366 !important; /* Use your preferred active color */
+    font-weight: bold;
+    position: relative;
+}
+
+/* Optional: Add an underline or indicator */
+nav ul a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ff3366;
+}
+
+
+
+
 .page-hero {
     text-align: center;
     padding: 60px 20px;
