@@ -125,6 +125,8 @@ function renderProducts(productsToRender = products) {
             `).join('');
 }
 
+button.addEventListener('click', () => addToCart(product.id));
+
 function filterProducts(category, event) {
     // Update active filter button
     document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
