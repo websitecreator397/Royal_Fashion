@@ -211,26 +211,28 @@ function renderCart() {
         return;
     }
 
-    cartItems.innerHTML = cart.map(item => `
-                <div class="cart-item">
-                    <img src="${item.image}" alt="${item.title}" class="cart-item-image">
-                    <div class="cart-item-info">
-                        <div class="cart-item-title">${item.title}</div>
-                        <div class="cart-item-price">${(item.price * item.quantity).toFixed(2)}</div>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">−</button>
-                            <span class="quantity">${item.quantity}</span>
-                            <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    document.getElementById('totalPrice').textContent = `Total: ${total.toFixed(2)}`;
-    document.getElementById('checkoutTotal').textContent = `Total: ${total.toFixed(2)}`;
-    cartTotal.style.display = 'block';
-}
+cartItems.innerHTML = '';
+cart.forEach(item => {
+    const cartItem = document.createElement('div');
+    cartItem.className = 'cart-item';
+    cartItem.innerHTML = `
+        <img src="${item.image}" alt="${item.title}" class="cart-item-image">
+        <div class="cart-item-info">
+            <div class="cart-item-title">${item.title}</div>
+            <div class="cart-item-price">${(item.price * item.quantity).toFixed(2)}</div>
+            <div class="quantity-controls">
+                <button class="quantity-btn minus">−</button>
+                <span class="quantity">${item.quantity}</span>
+                <button class="quantity-btn plus">+</button>
+            </div>
+        </div>
+    `;
+    cartItem.querySelector('.minus')
+        .addEventListener('click', () => updateQuantity(item.id, -1));
+    cartItem.querySelector('.plus')
+        .addEventListener('click', () => updateQuantity(item.id, 1));
+    cartItems.appendChild(cartItem);
+});
 
 function toggleCart() {
     const modal = document.getElementById('cartModal');
