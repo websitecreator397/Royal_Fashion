@@ -265,7 +265,7 @@ function hideCheckout() {
     document.getElementById('checkoutForm').classList.remove('active');
 }
 
-function selectPayment(method) {
+function selectPayment(method, event) {
     currentPaymentMethod = method;
     document.querySelectorAll('.payment-method').forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');
