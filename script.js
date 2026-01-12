@@ -117,6 +117,7 @@ function renderProducts(productsToRender = products) {
         const card = document.createElement('div');
         card.className = 'product-card';
         card.dataset.category = product.category;
+
         card.innerHTML = `
             <img src="${product.image}" alt="${product.title}" class="product-image">
             <div class="product-info">
@@ -126,11 +127,14 @@ function renderProducts(productsToRender = products) {
                 <button class="add-to-cart">Add to Cart</button>
             </div>
         `;
-        card.querySelector('.add-to-cart').addEventListener('click', (e) => addToCart(product.id, e));
+
+        // Attach event listener safely
+        card.querySelector('.add-to-cart')
+            .addEventListener('click', (e) => addToCart(product.id, e));
+
         grid.appendChild(card);
     });
 }
-
 
 function filterProducts(category, event) {
     // Update active filter button
