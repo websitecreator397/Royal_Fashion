@@ -233,6 +233,7 @@ cart.forEach(item => {
         .addEventListener('click', () => updateQuantity(item.id, 1));
     cartItems.appendChild(cartItem);
 });
+}
 
 function toggleCart() {
     const modal = document.getElementById('cartModal');
