@@ -142,7 +142,7 @@ function filterProducts(category, event) {
     renderProducts(filteredProducts);
 }
 
-function addToCart(productId) {
+function addToCart(productId, event) {
     const product = products.find(p => p.id === productId);
     const existingItem = cart.find(item => item.id === productId);
 
@@ -155,15 +155,17 @@ function addToCart(productId) {
     updateCartCount();
     renderCart();
 
-    // Show success feedback
-    const button = event.target;
-    const originalText = button.textContent;
-    button.textContent = '✓ Added!';
-    button.style.background = '#34C759';
-    setTimeout(() => {
-        button.textContent = originalText;
-        button.style.background = '#000';
-    }, 1000);
+    // Show success feedback on the clicked button
+    if (event && event.target) {
+        const button = event.target;
+        const originalText = button.textContent;
+        button.textContent = '✓ Added!';
+        button.style.background = '#34C759';
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.style.background = '#000';
+        }, 1000);
+    }
 }
 
 function removeFromCart(productId) {
