@@ -112,20 +112,25 @@ let currentPaymentMethod = 'credit';
 
 function renderProducts(productsToRender = products) {
     const grid = document.getElementById('productGrid');
-    grid.innerHTML = productsToRender.map(product => `
-                <div class="product-card" data-category="${product.category}">
-                    <img src="${product.image}" alt="${product.title}" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">${product.title}</h3>
-                        <p class="product-category">${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</p>
-                        <div class="product-price">$${product.price}</div>
-                        <button class="add-to-cart" onclick="addToCart(${product.id})">Add to Cart</button>
-                    </div>
-                </div>
-            `).join('');
+    grid.innerHTML = '';
+    productsToRender.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.dataset.category = product.category;
+        card.innerHTML = `
+            <img src="${product.image}" alt="${product.title}" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">${product.title}</h3>
+                <p class="product-category">${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</p>
+                <div class="product-price">$${product.price}</div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        `;
+        card.querySelector('.add-to-cart').addEventListener('click', (e) => addToCart(product.id, e));
+        grid.appendChild(card);
+    });
 }
 
-button.addEventListener('click', () => addToCart(product.id));
 
 function filterProducts(category, event) {
     // Update active filter button
