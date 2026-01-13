@@ -324,8 +324,12 @@ function processOrder(event) {
     }, 2000);
 }
 
-// Format card number input
 document.addEventListener('DOMContentLoaded', function () {
+    // Initialize products and cart
+    renderProducts();
+    updateCartCount();
+
+    // Format card number input
     const cardNumberInput = document.getElementById('cardNumber');
     const expiryInput = document.getElementById('expiryDate');
     const cvvInput = document.getElementById('cvv');
@@ -353,6 +357,20 @@ document.addEventListener('DOMContentLoaded', function () {
             e.target.value = e.target.value.replace(/[^0-9]/g, '').substring(0, 4);
         });
     }
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
 });
 
 // Close cart when clicking outside
@@ -362,19 +380,7 @@ document.getElementById('cartModal').addEventListener('click', function (e) {
     }
 });
 
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
+
 
 // Initialize the page
 document.addEventListener('DOMContentLoaded', function () {
