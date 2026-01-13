@@ -137,10 +137,12 @@ function renderProducts(productsToRender = products) {
 }
 
 function filterProducts(category, event) {
-    // Update active filter button
-    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
+  // defensive: get the element that triggered the call
+  const btn = (event && (event.target || event.srcElement)) || document.querySelector('.filter-btn');
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
 
+  // ...rest of filtering logic...
     // Filter products
     const filteredProducts = category === 'all' ? products : products.filter(p => p.category === category);
     renderProducts(filteredProducts);
