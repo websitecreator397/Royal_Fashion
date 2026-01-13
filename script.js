@@ -212,40 +212,50 @@ function updateCartCount() {
 function renderCart() {
     const cartItems = document.getElementById('cartItems');
     const cartTotal = document.getElementById('cartTotal');
+    const totalPriceEl = document.getElementById('totalPrice');
 
     if (cart.length === 0) {
         cartItems.innerHTML = `
-                    <div class="empty-cart">
-                        <div class="empty-cart-icon">🛒</div>
-                        <p>Your cart is empty</p>
-                    </div>
-                `;
+            <div class="empty-cart">
+                <div class="empty-cart-icon">🛒</div>
+                <p>Your cart is empty</p>
+            </div>
+        `;
         cartTotal.style.display = 'none';
         return;
     }
 
-cartItems.innerHTML = '';
-cart.forEach(item => {
-    const cartItem = document.createElement('div');
-    cartItem.className = 'cart-item';
-    cartItem.innerHTML = `
-        <img src="${item.image}" alt="${item.title}" class="cart-item-image">
-        <div class="cart-item-info">
-            <div class="cart-item-title">${item.title}</div>
-            <div class="cart-item-price">${(item.price * item.quantity).toFixed(2)}</div>
-            <div class="quantity-controls">
-                <button class="quantity-btn minus">−</button>
-                <span class="quantity">${item.quantity}</span>
-                <button class="quantity-btn plus">+</button>
+    cartItems.innerHTML = '';
+    let total = 0;
+
+    cart.forEach(item => {
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+            <img src="${item.image}" alt="${item.title}" class="cart-item-image">
+            <div class="cart-item-info">
+                <div class="cart-item-title">${item.title}</div>
+                <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                <div class="quantity-controls">
+                    <button class="quantity-btn minus">−</button>
+                    <span class="quantity">${item.quantity}</span>
+                    <button class="quantity-btn plus">+</button>
+                </div>
             </div>
-        </div>
-    `;
-    cartItem.querySelector('.minus')
-        .addEventListener('click', () => updateQuantity(item.id, -1));
-    cartItem.querySelector('.plus')
-        .addEventListener('click', () => updateQuantity(item.id, 1));
-    cartItems.appendChild(cartItem);
-});
+        `;
+        cartItem.querySelector('.minus')
+            .addEventListener('click', () => updateQuantity(item.id, -1));
+        cartItem.querySelector('.plus')
+            .addEventListener('click', () => updateQuantity(item.id, 1));
+        cartItems.appendChild(cartItem);
+
+        // Add to total
+        total += item.price * item.quantity;
+    });
+
+    // ✅ Update total display
+    totalPriceEl.textContent = `Total: $${total.toFixed(2)}`;
+    cartTotal.style.display = 'block';
 }
 
 function toggleCart() {
