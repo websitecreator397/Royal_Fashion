@@ -371,19 +371,14 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-});
 
-// Close cart when clicking outside
-document.getElementById('cartModal').addEventListener('click', function (e) {
-    if (e.target === this) {
-        toggleCart();
+    // Close cart when clicking outside
+    const cartModal = document.getElementById('cartModal');
+    if (cartModal) {
+        cartModal.addEventListener('click', function (e) {
+            if (e.target === this) {
+                toggleCart();
+            }
+        });
     }
-});
-
-
-
-// Initialize the page
-document.addEventListener('DOMContentLoaded', function () {
-    renderProducts();
-    updateCartCount();
 });
