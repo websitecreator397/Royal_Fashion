@@ -137,10 +137,21 @@ function renderProducts(productsToRender = products) {
 }
 
 function filterProducts(category, event) {
-  // defensive: get the element that triggered the call
-  const btn = (event && (event.target || event.srcElement)) || document.querySelector('.filter-btn');
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
+    // 1. Safety check to ensure event exists
+    if (!event) return;
+
+    // 2. Remove active class from all buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    // 3. FIX: Use currentTarget to ensure the button gets the class, 
+    // even if the user clicks an icon inside the button.
+    event.currentTarget.classList.add('active');
+
+    // Logic to filter your products (example)
+    console.log("Filtering products by:", category);
+    renderProducts(category); 
 
   // ...rest of filtering logic...
     // Filter products
