@@ -280,6 +280,11 @@ function showCheckout() {
     document.getElementById('cartItems').style.display = 'none';
     document.getElementById('cartTotal').style.display = 'none';
     document.getElementById('checkoutForm').classList.add('active');
+
+    // ✅ Update checkout total
+    const checkoutTotal = document.getElementById('checkoutTotal');
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    checkoutTotal.textContent = `Total: $${total.toFixed(2)}`;
 }
 
 function hideCheckout() {
