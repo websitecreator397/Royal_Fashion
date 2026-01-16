@@ -294,7 +294,7 @@ function removeFromCart(productId) {
         placeOrderBtn.disabled = true;
             
         setTimeout(() => {
-            alert(`🎉 Order placed successfully!\n\nOrder Details:\n- Items: ${cart.length}\n- Total: ${orderData.total.toFixed(2)}\n- Delivery to: ${orderData.customer.name}\n\nThank you for shopping with LUXE!`);
+            alert(`🎉 Order placed successfully!\n\nOrder Details:\n- Items: ${cart.length}\n- Total: ${orderData.total.toFixed(2)}\n- Delivery to: ${orderData.customer.name}\n\nThank you for shopping with Royal Fashion!`);
                 
             // Reset everything
             cart = [];
