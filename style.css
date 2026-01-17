@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -183,7 +182,7 @@ body {
 .section-title {
     text-align: center;
     margin-bottom: 4rem;
-    color:#d4af37;
+    color: #d4af37;
 }
 
 .section-title h2 {
@@ -833,7 +832,7 @@ body {
 
 .form-group-contact input,
 .form-group-contact textarea,
-.form-group-contact select{
+.form-group-contact select {
     width: 100%;
     padding: 12px 15px;
     background: #000;
@@ -948,26 +947,5 @@ body {
 
     .section-title {
         font-size: 28px;
-    }
-
-    /* Error: Nav was previously static or missing 'right' property transition */
-    .navbar {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    position: fixed;
-    top: 0;
-    right: -300px; /* Hidden state */
-    height: 100vh;
-    width: 300px;
-    background-color: #E3E6F3;
-    box-shadow: 0 40px 60px rgba(0,0,0,0.1);
-    padding: 80px 0 0 10px;
-    transition: 0.3s;
-    }
-
-    .navbar.active {
-    right: 0px; /* Fixed: This triggers the slide-in */
     }
 }
