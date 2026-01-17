@@ -67,7 +67,7 @@ const products = [
         title: "Casual Polo Shirt",
         category: "men",
         price: 69.99,
-        image: "https://m.media-amazon.com/images/I/61EmEP2muBL._AC_UL320_.jpg" 
+        image: "https://m.media-amazon.com/images/I/61EmEP2muBL._AC_UL320_.jpg"
     },
     {
         id: 11,
@@ -88,31 +88,31 @@ const products = [
         title: "Cotton Formal Shirt",
         category: "men",
         price: 279.99,
-        image: "https://images.unsplash.com/photo-1627976238251-a0191b91145b?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fGZvcm1hbCUyMGNvdHRvbiUyMHNoaXJ0JTIwbWVufGVufDB8fDB8fHww" 
+        image: "https://images.unsplash.com/photo-1627976238251-a0191b91145b?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fGZvcm1hbCUyMGNvdHRvbiUyMHNoaXJ0JTIwbWVufGVufDB8fDB8fHww"
     },
     {
         id: 14,
         title: "Kurta Set with Dupatta",
         category: "women",
         price: 249.99,
-        image: "https://m.media-amazon.com/images/I/51eAtQZeCxL._SX425_.jpg" 
+        image: "https://m.media-amazon.com/images/I/51eAtQZeCxL._SX425_.jpg"
     },
     {
         id: 15,
         title: "Leather Belt",
         category: "accessories",
         price: 159.99,
-        image: "https://m.media-amazon.com/images/I/71+aebqY0DL._SX679_.jpg" 
+        image: "https://m.media-amazon.com/images/I/71+aebqY0DL._SX679_.jpg"
     }
 ];
 
 // Cart functionality
-        let cart = [];
-        let currentPaymentMethod = 'credit';
+let cart = [];
+let currentPaymentMethod = 'credit';
 
-        function renderProducts(productsToRender = products) {
-            const grid = document.getElementById('productGrid');
-            grid.innerHTML = productsToRender.map(product => `
+function renderProducts(productsToRender = products) {
+    const grid = document.getElementById('productGrid');
+    grid.innerHTML = productsToRender.map(product => `
                 <div class="product-card" data-category="${product.category}">
                     <img src="${product.image}" alt="${product.title}" class="product-image">
                     <div class="product-info">
@@ -123,7 +123,7 @@ const products = [
                     </div>
                 </div>
             `).join('');
-        }
+}
 
 function filterProducts(category) {
     // Update active filter button
@@ -136,69 +136,69 @@ function filterProducts(category) {
 }
 
 function addToCart(productId) {
-        const product = products.find(p => p.id === productId);
-        const existingItem = cart.find(item => item.id === productId);
+    const product = products.find(p => p.id === productId);
+    const existingItem = cart.find(item => item.id === productId);
 
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cart.push({ ...product, quantity: 1 });
-        }
-
-        updateCartCount();
-        renderCart();
-            
-        // Show success feedback
-        const button = event.target;
-        const originalText = button.textContent;
-        button.textContent = '✓ Added!';
-        button.style.background = '#34C759';
-        setTimeout(() => {
-            button.textContent = originalText;
-            button.style.background = '#000';
-        }, 1000);
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ ...product, quantity: 1 });
     }
+
+    updateCartCount();
+    renderCart();
+
+    // Show success feedback
+    const button = event.target;
+    const originalText = button.textContent;
+    button.textContent = '✓ Added!';
+    button.style.background = '#34C759';
+    setTimeout(() => {
+        button.textContent = originalText;
+        button.style.background = '#000';
+    }, 1000);
+}
 
 function removeFromCart(productId) {
-        cart = cart.filter(item => item.id !== productId);
-        updateCartCount();
-        renderCart();
-    }
+    cart = cart.filter(item => item.id !== productId);
+    updateCartCount();
+    renderCart();
+}
 
-    function updateQuantity(productId, change) {
-        const item = cart.find(item => item.id === productId);
-        if (item) {
-            item.quantity += change;
-            if (item.quantity <= 0) {
-                removeFromCart(productId);
-            } else {
-                updateCartCount();
-                renderCart();
-            }
+function updateQuantity(productId, change) {
+    const item = cart.find(item => item.id === productId);
+    if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+            removeFromCart(productId);
+        } else {
+            updateCartCount();
+            renderCart();
         }
     }
+}
 
-    function updateCartCount() {
-        const count = cart.reduce((total, item) => total + item.quantity, 0);
-        document.getElementById('cartCount').textContent = count;
-    }
+function updateCartCount() {
+    const count = cart.reduce((total, item) => total + item.quantity, 0);
+    document.getElementById('cartCount').textContent = count;
+}
 
-    function renderCart() {
-        const cartItems = document.getElementById('cartItems');
-        const cartTotal = document.getElementById('cartTotal');
+function renderCart() {
+    const cartItems = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
 
-        if (cart.length === 0) {
-            cartItems.innerHTML = `
+    if (cart.length === 0) {
+        cartItems.innerHTML = `
                 <div class="empty-cart">
                     <div class="empty-cart-icon">🛒</div>
                     <p>Your cart is empty</p>
                 </div>
             `;
-            cartTotal.style.display = 'none';
-            return;
-        }
+        cartTotal.style.display = 'none';
+        return;
+    }
 
-        cartItems.innerHTML = cart.map(item => `
+    cartItems.innerHTML = cart.map(item => `
             <div class="cart-item">
                 <img src="${item.image}" alt="${item.title}" class="cart-item-image">
                 <div class="cart-item-info">
@@ -213,153 +213,153 @@ function removeFromCart(productId) {
             </div>
         `).join('');
 
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        document.getElementById('totalPrice').textContent = `Total: ${total.toFixed(2)}`;
-        document.getElementById('checkoutTotal').textContent = `Total: ${total.toFixed(2)}`;
-        cartTotal.style.display = 'block';
-    }
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    document.getElementById('totalPrice').textContent = `Total: ${total.toFixed(2)}`;
+    document.getElementById('checkoutTotal').textContent = `Total: ${total.toFixed(2)}`;
+    cartTotal.style.display = 'block';
+}
 
-    function toggleCart() {
-        const modal = document.getElementById('cartModal');
-        if (modal.style.display === 'block') {
-            modal.classList.remove('active');
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 400);
-        } else {
-            modal.style.display = 'block';
-            setTimeout(() => modal.classList.add('active'), 10);
-        }
-            
-        // Hide checkout form when opening cart
-        hideCheckout();
-    }
-
-    function showCheckout() {
-        if (cart.length === 0) return;
-            
-        document.getElementById('cartItems').style.display = 'none';
-        document.getElementById('cartTotal').style.display = 'none';
-        document.getElementById('checkoutForm').classList.add('active');
-    }
-
-    function hideCheckout() {
-        document.getElementById('cartItems').style.display = 'block';
-        document.getElementById('cartTotal').style.display = 'block';
-        document.getElementById('checkoutForm').classList.remove('active');
-    }
-
-    function selectPayment(method) {
-        currentPaymentMethod = method;
-        document.querySelectorAll('.payment-method').forEach(btn => btn.classList.remove('active'));
-        event.target.classList.add('active');
-            
-        const creditCardForm = document.getElementById('creditCardForm');
-        if (method === 'credit') {
-            creditCardForm.style.display = 'block';
-        } else {
-            creditCardForm.style.display = 'none';
-        }
-    }
-
-    function processOrder(event) {
-        event.preventDefault();
-            
-        if (cart.length === 0) return;
-            
-        // Get form data
-        const formData = new FormData(event.target);
-        const orderData = {
-            items: cart,
-            total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
-            customer: {
-                name: formData.get('fullName'),
-                email: formData.get('email'),
-                phone: formData.get('phone')
-            },
-            shipping: {
-                address: formData.get('address'),
-                city: formData.get('city'),
-                zipCode: formData.get('zipCode'),
-                country: formData.get('country')
-            },
-            payment: {
-                method: currentPaymentMethod
-            }
-        };
-            
-        // Simulate order processing
-        const placeOrderBtn = document.querySelector('.place-order-btn');
-        placeOrderBtn.textContent = '🔄 Processing...';
-        placeOrderBtn.disabled = true;
-            
+function toggleCart() {
+    const modal = document.getElementById('cartModal');
+    if (modal.style.display === 'block') {
+        modal.classList.remove('active');
         setTimeout(() => {
-            alert(`🎉 Order placed successfully!\n\nOrder Details:\n- Items: ${cart.length}\n- Total: ${orderData.total.toFixed(2)}\n- Delivery to: ${orderData.customer.name}\n\nThank you for shopping with Royal Fashion!`);
-                
-            // Reset everything
-            cart = [];
-            updateCartCount();
-            renderCart();
-            toggleCart();
-            event.target.reset();
-                
-            placeOrderBtn.textContent = '🚀 Place Order';
-            placeOrderBtn.disabled = false;
-        }, 2000);
+            modal.style.display = 'none';
+        }, 400);
+    } else {
+        modal.style.display = 'block';
+        setTimeout(() => modal.classList.add('active'), 10);
     }
 
-    // Format card number input
-    const cardNumberInput = document.getElementById('cardNumber');
-    const expiryInput = document.getElementById('expiryDate');
-    const cvvInput = document.getElementById('cvv');
+    // Hide checkout form when opening cart
+    hideCheckout();
+}
 
-    if (cardNumberInput) {
-        cardNumberInput.addEventListener('input', function (e) {
-            let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
-            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
-            e.target.value = formattedValue;
-        });
+function showCheckout() {
+    if (cart.length === 0) return;
+
+    document.getElementById('cartItems').style.display = 'none';
+    document.getElementById('cartTotal').style.display = 'none';
+    document.getElementById('checkoutForm').classList.add('active');
+}
+
+function hideCheckout() {
+    document.getElementById('cartItems').style.display = 'block';
+    document.getElementById('cartTotal').style.display = 'block';
+    document.getElementById('checkoutForm').classList.remove('active');
+}
+
+function selectPayment(method) {
+    currentPaymentMethod = method;
+    document.querySelectorAll('.payment-method').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    const creditCardForm = document.getElementById('creditCardForm');
+    if (method === 'credit') {
+        creditCardForm.style.display = 'block';
+    } else {
+        creditCardForm.style.display = 'none';
     }
+}
 
-    if (expiryInput) {
-        expiryInput.addEventListener('input', function (e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length >= 2) {
-                value = value.substring(0, 2) + '/' + value.substring(2, 4);
-            }
-            e.target.value = value;
-        });
+function processOrder(event) {
+    event.preventDefault();
+
+    if (cart.length === 0) return;
+
+    // Get form data
+    const formData = new FormData(event.target);
+    const orderData = {
+        items: cart,
+        total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+        customer: {
+            name: formData.get('fullName'),
+            email: formData.get('email'),
+            phone: formData.get('phone')
+        },
+        shipping: {
+            address: formData.get('address'),
+            city: formData.get('city'),
+            zipCode: formData.get('zipCode'),
+            country: formData.get('country')
+        },
+        payment: {
+            method: currentPaymentMethod
+        }
+    };
+
+    // Simulate order processing
+    const placeOrderBtn = document.querySelector('.place-order-btn');
+    placeOrderBtn.textContent = '🔄 Processing...';
+    placeOrderBtn.disabled = true;
+
+    setTimeout(() => {
+        alert(`🎉 Order placed successfully!\n\nOrder Details:\n- Items: ${cart.length}\n- Total: ${orderData.total.toFixed(2)}\n- Delivery to: ${orderData.customer.name}\n\nThank you for shopping with Royal Fashion!`);
+
+        // Reset everything
+        cart = [];
+        updateCartCount();
+        renderCart();
+        toggleCart();
+        event.target.reset();
+
+        placeOrderBtn.textContent = '🚀 Place Order';
+        placeOrderBtn.disabled = false;
+    }, 2000);
+}
+
+// Format card number input
+const cardNumberInput = document.getElementById('cardNumber');
+const expiryInput = document.getElementById('expiryDate');
+const cvvInput = document.getElementById('cvv');
+
+if (cardNumberInput) {
+    cardNumberInput.addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+        let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+        e.target.value = formattedValue;
+    });
+}
+
+if (expiryInput) {
+    expiryInput.addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length >= 2) {
+            value = value.substring(0, 2) + '/' + value.substring(2, 4);
+        }
+        e.target.value = value;
+    });
+}
+
+if (cvvInput) {
+    cvvInput.addEventListener('input', function (e) {
+        e.target.value = e.target.value.replace(/[^0-9]/g, '').substring(0, 4);
+    });
+}
+
+// Close cart when clicking outside
+document.getElementById('cartModal').addEventListener('click', function (e) {
+    if (e.target === this) {
+        toggleCart();
     }
+});
 
-    if (cvvInput) {
-        cvvInput.addEventListener('input', function (e) {
-            e.target.value = e.target.value.replace(/[^0-9]/g, '').substring(0, 4);
-        });
-    }
-
-        // Close cart when clicking outside
-        document.getElementById('cartModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                toggleCart();
-            }
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
             });
-        });
+        }
+    });
+});
 
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', function() {
-            renderProducts();
-            updateCartCount();
-        });
+// Initialize the page
+document.addEventListener('DOMContentLoaded', function () {
+    renderProducts();
+    updateCartCount();
+});
