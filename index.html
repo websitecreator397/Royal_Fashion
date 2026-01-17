@@ -27,7 +27,8 @@
                     <i class="fas fa-shopping-cart" aria-hidden="true"></i> Cart
                     <span class="cart-count" id="cartCount">0</span>
                 </button>
-                <i class="fas fa-bars" id="menu-icon" onclick="toggleMenu()" style="display:none; cursor:pointer; margin-left:15px;" aria-hidden="true"></i>
+                <i class="fas fa-bars" id="menu-icon" onclick="toggleMenu()"
+                    style="display:none; cursor:pointer; margin-left:15px;" aria-hidden="true"></i>
             </div>
         </nav>
     </header>
@@ -68,7 +69,8 @@
         <div class="cart-content">
             <div class="cart-header">
                 <h3><i class="fas fa-shopping-bag" aria-hidden="true"></i> Shopping Cart</h3>
-                <button class="close-cart" onclick="toggleCart()" aria-label="Close cart"><i class="fas fa-times" aria-hidden="true"></i></button>
+                <button class="close-cart" onclick="toggleCart()" aria-label="Close cart"><i class="fas fa-times"
+                        aria-hidden="true"></i></button>
             </div>
 
             <div id="cartItems">
@@ -85,7 +87,8 @@
                 <button class="checkout-btn" onclick="showCheckout()">Proceed to Checkout</button>
             </div>
             <div class="checkout-form" id="checkoutForm">
-                <button class="back-to-cart" onclick="hideCheckout()"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Cart</button>
+                <button class="back-to-cart" onclick="hideCheckout()"><i class="fas fa-arrow-left"
+                        aria-hidden="true"></i> Back to Cart</button>
 
                 <form onsubmit="processOrder(event)">
                     <div class="form-section">
@@ -141,7 +144,7 @@
                         <div class="payment-methods">
                             <div class="payment-method active" onclick="selectPayment('credit', event)">
                                 <i class="fas fa-credit-card" aria-hidden="true"></i> Credit Card
-                            </div>    
+                            </div>
                         </div>
 
                         <div class="creditCardForm">
@@ -162,14 +165,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="cardName">Card Name</label>
-                                <input type="text" id="cardName" name="cardName" placeholder=""
-                                    required>
+                                <input type="text" id="cardName" name="cardName" placeholder="" required>
                             </div>
                         </div>
                     </div>
 
                     <div class="total-price" id="checkoutTotal">Total: $0.00</div>
-                    <button type="submit" class="place-order-btn"><i class="fas fa-rocket" aria-hidden="true"></i> Order</button>
+                    <button type="submit" class="place-order-btn"><i class="fas fa-rocket" aria-hidden="true"></i>
+                        Order</button>
                 </form>
             </div>
         </div>
@@ -191,4 +194,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
