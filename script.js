@@ -363,3 +363,12 @@ document.addEventListener('DOMContentLoaded', function () {
     renderProducts();
     updateCartCount();
 });
+
+
+function toggleMenu() {
+  console.log("Menu toggled from external script!");
+  const menu = document.getElementById("myMenu");
+  if (menu) {
+    menu.classList.toggle("active");
+  }
+}
