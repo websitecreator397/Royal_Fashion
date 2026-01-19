@@ -948,9 +948,8 @@ body {
     .section-title {
         font-size: 28px;
     }
-
-     
-     .myMenu.active {
+    
+    .myMenu.active {
         display: block;
-}
+    }
 }
